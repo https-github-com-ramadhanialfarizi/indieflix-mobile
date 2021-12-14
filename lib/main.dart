@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:indieflix/screen/bottom_navigation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
          ThemeMode.light for light theme, 
          ThemeMode.dark for dark theme
       */
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const BottomNavigation(),
     );
   }
 }
