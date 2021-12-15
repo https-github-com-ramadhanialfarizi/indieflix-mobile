@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:indieflix/screen/bottom_navigation.dart';
+import 'package:indieflix/screen/landing.dart';
+import 'package:indieflix/screen/login.dart';
 import 'package:indieflix/screen/movie_detail.dart';
 import 'package:indieflix/screen/movie_player.dart';
+import 'package:indieflix/screen/register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'App Title',
+      title: 'Indie Flix',
       theme: ThemeData(
         brightness: Brightness.light,
         /* light theme settings */
@@ -29,12 +32,22 @@ class MyApp extends StatelessWidget {
          ThemeMode.light for light theme,
          ThemeMode.dark for dark theme
       */
-      home: const BottomNavigation(),
+      home: const Landing(),
+      // initialRoute: '/landing',
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
           case '/':
             return CupertinoPageRoute(
                 builder: (_) => const BottomNavigation(), settings: settings);
+          case '/landing':
+            return CupertinoPageRoute(
+                builder: (_) => const Landing(), settings: settings);
+          case '/register':
+            return CupertinoPageRoute(
+                builder: (_) => const Register(), settings: settings);
+          case '/login':
+            return CupertinoPageRoute(
+                builder: (_) => const Login(), settings: settings);
           case 'movie_detail':
             return CupertinoPageRoute(
                 builder: (_) => const MovieDetail(), settings: settings);

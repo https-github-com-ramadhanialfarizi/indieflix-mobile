@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class Landing extends StatefulWidget {
   const Landing({Key? key}) : super(key: key);
@@ -10,6 +11,31 @@ class Landing extends StatefulWidget {
 class _LandingState extends State<Landing> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        color: Colors.white,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(onPressed: () {}, child: const Text('Login')),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                    onPressed: () => Navigator.pushNamed(context, '/register'),
+                    child: const Text('Register')),
+                const SizedBox(
+                  width: 8,
+                ),
+                ElevatedButton(
+                    onPressed: () => Navigator.pushNamed(context, '/login'),
+                    child: const Text('Login')),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
