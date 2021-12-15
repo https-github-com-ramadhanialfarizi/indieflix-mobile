@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 // import 'package:indieflix/screen/classroom.dart';
 // import 'package:indieflix/screen/club_activity.dart';
 import 'package:indieflix/screen/home.dart';
@@ -34,6 +35,14 @@ class _BottomNavigationState extends State<BottomNavigation> {
         _selectedIndex = index;
       });
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
   }
 
   @override
