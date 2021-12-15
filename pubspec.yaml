@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   youtube_player_flutter: ^8.0.0
   video_player:
+  scroll_snap_list: ^0.8.4
 
 dev_dependencies:
   flutter_test:

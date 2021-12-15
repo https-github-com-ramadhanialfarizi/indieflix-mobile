@@ -19,15 +19,18 @@ class _CardImageState extends State<CardImage> {
           semanticContainer: true,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           child: SizedBox(
-            height: 500,
+            height: 200,
             width: double.infinity,
             child: Stack(
               children: [
-                const Image(
-                  height: double.infinity,
-                  image: NetworkImage(
-                      "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=240"),
-                  fit: BoxFit.cover,
+                const SizedBox(
+                  width: double.infinity,
+                  child: Image(
+                    height: double.infinity,
+                    image: NetworkImage(
+                        "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=240"),
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -78,7 +81,7 @@ class _CardImageState extends State<CardImage> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
-          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 9),
+          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
         ),
       ],
     );

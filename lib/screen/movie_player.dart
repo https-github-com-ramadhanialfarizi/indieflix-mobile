@@ -71,7 +71,7 @@ class _MoviePlayerState extends State<MoviePlayer>
         child: FutureBuilder(
           future: _initializeVideoPlayerFuture,
           builder: (context, snapshot) {
-            print(snapshot);
+            // print(snapshot);
             if (snapshot.connectionState == ConnectionState.done) {
               // If the VideoPlayerController has finished initialization, use
               // the data it provides to limit the aspect ratio of the video.
