@@ -28,7 +28,7 @@ class _MoviePlayerState extends State<MoviePlayer>
 
     _appBarController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 400),
     );
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     SystemChrome.setPreferredOrientations([
@@ -58,7 +58,7 @@ class _MoviePlayerState extends State<MoviePlayer>
         controller: _appBarController,
         child: AppBar(
           title: const Text('Last Night in Soho'),
-          systemOverlayStyle: SystemUiOverlayStyle(),
+          systemOverlayStyle: const SystemUiOverlayStyle(),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () => Navigator.pop(context),

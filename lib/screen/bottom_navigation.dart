@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 // import 'package:indieflix/screen/classroom.dart';
 // import 'package:indieflix/screen/club_activity.dart';
 import 'package:indieflix/screen/home.dart';
+import 'package:indieflix/screen/profile.dart';
+import 'package:indieflix/screen/recent_upload.dart';
 // import 'package:indieflix/screen/profile.dart';
 // import 'package:indieflix/screen/quick_action.dart';
 
@@ -19,22 +21,14 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
-    Home(),
-    Home(),
-    // ClassRoom(),
-    // QuickAction(),
-    // ClubActivity(),
-    // Profile()
+    RecentUpload(),
+    Profile()
   ];
 
   void _onItemTapped(int index) {
-    if (index == 2) {
-      return;
-    } else {
-      setState(() {
-        _selectedIndex = index;
-      });
-    }
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   @override
@@ -60,8 +54,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
             label: 'HOME',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.check_box_outline_blank),
-            label: 'SCAN',
+            icon: Icon(Icons.fiber_new),
+            label: 'RECENT',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
@@ -69,30 +63,30 @@ class _BottomNavigationState extends State<BottomNavigation> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: const Color(0xff073FCF),
+        // selectedItemColor: const Color(0xff073FCF),
         selectedFontSize: 12,
         onTap: _onItemTapped,
       ),
-      floatingActionButton: Container(
-        width: 100,
-        height: 100,
-        padding: const EdgeInsets.only(top: 40.0),
-        child: FloatingActionButton(
-          backgroundColor: const Color(0xffFAB530),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
-              Icon(Icons.qr_code_scanner),
-              Text(
-                "SCAN",
-                style: TextStyle(color: Colors.white, fontSize: 10),
-              )
-            ],
-          ),
-          onPressed: () {},
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton: Container(
+      //   width: 100,
+      //   height: 100,
+      //   padding: const EdgeInsets.only(top: 40.0),
+      //   child: FloatingActionButton(
+      //     backgroundColor: const Color(0xffFAB530),
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //       children: const [
+      //         Icon(Icons.qr_code_scanner),
+      //         Text(
+      //           "SCAN",
+      //           style: TextStyle(color: Colors.white, fontSize: 10),
+      //         )
+      //       ],
+      //     ),
+      //     onPressed: () {},
+      //   ),
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

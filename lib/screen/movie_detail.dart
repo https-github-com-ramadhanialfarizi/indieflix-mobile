@@ -70,11 +70,43 @@ class _MovieDetailState extends State<MovieDetail> {
                         const SizedBox(
                           height: 8,
                         ),
-                        ElevatedButton.icon(
-                            onPressed: () =>
-                                Navigator.pushNamed(context, 'movie_player'),
-                            icon: const Icon(Icons.play_circle_outline),
-                            label: const Text("Play"))
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton.icon(
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color?>(
+                                            Colors.red[700])),
+                                onPressed: () => Navigator.pushNamed(
+                                    context, 'movie_player'),
+                                icon: const Icon(Icons.play_circle_outline),
+                                label: const Text('Putar')),
+                            const SizedBox(
+                              width: 16,
+                            ),
+                            ElevatedButton.icon(
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.transparent)),
+                                onPressed: () => Navigator.pushNamed(
+                                    context, 'movie_player'),
+                                icon: const Icon(Icons.play_circle_outline),
+                                label: const Text('Vote')),
+                            const SizedBox(
+                              width: 16,
+                            ),
+                            ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.transparent)),
+                                onPressed: () => Navigator.pushNamed(
+                                    context, 'movie_player'),
+                                child: const Text('Beri Ulasan')),
+                          ],
+                        )
                       ],
                     ),
                   )
