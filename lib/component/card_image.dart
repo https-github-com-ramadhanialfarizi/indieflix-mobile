@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 
-class CardImage extends StatefulWidget {
-  const CardImage({Key? key}) : super(key: key);
+class CardImage extends StatelessWidget {
+  const CardImage({
+    Key? key,
+    this.id = "",
+    this.title = "",
+    this.synopsis = "",
+    this.info = "",
+    this.streamURL = "",
+    this.posterURL =
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQI2zZL1k5VDKb-Sv3Hu586PGDI2l50ZL_YbC0ki3Y_OKsTq__-iiYolz_9khyx-fy1Gk&usqp=CAU",
+  }) : super(key: key);
 
-  @override
-  _CardImageState createState() => _CardImageState();
-}
-
-class _CardImageState extends State<CardImage> {
-  late String movieTitle = "Tilik";
-  late String movieInfo = "test • test • test";
+  final String id;
+  final String title;
+  final String synopsis;
+  final String info;
+  final String streamURL;
+  final String posterURL;
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +31,11 @@ class _CardImageState extends State<CardImage> {
             width: double.infinity,
             child: Stack(
               children: [
-                const SizedBox(
+                SizedBox(
                   width: double.infinity,
                   child: Image(
                     height: double.infinity,
-                    image: NetworkImage(
-                        "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=240"),
+                    image: NetworkImage(posterURL),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -56,14 +63,16 @@ class _CardImageState extends State<CardImage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        movieTitle,
+                        title,
                         style: Theme.of(context)
                             .textTheme
                             .headline5
                             ?.merge(const TextStyle(color: Colors.white)),
                       ),
-                      Text(movieInfo,
-                          style: const TextStyle(color: Colors.white)),
+                      const SizedBox(
+                        height: 4.0,
+                      ),
+                      Text(info, style: const TextStyle(color: Colors.white)),
                     ],
                   ),
                 ),
