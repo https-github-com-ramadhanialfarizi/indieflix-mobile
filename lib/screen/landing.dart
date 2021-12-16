@@ -14,7 +14,7 @@ class _LandingState extends State<Landing> {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        color: Colors.white,
+        color: Colors.grey[850],
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [

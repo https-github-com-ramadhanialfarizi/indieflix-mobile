@@ -14,6 +14,8 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  final bool isLoggedIn = true;
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
          ThemeMode.light for light theme,
          ThemeMode.dark for dark theme
       */
-      home: const Register(),
+      home: isLoggedIn ? const BottomNavigation() : const Landing(),
       // initialRoute: '/landing',
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
