@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
          ThemeMode.light for light theme,
          ThemeMode.dark for dark theme
       */
-      home: const Landing(),
+      home: const Register(),
       // initialRoute: '/landing',
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
