@@ -39,6 +39,8 @@ dependencies:
   scroll_snap_list: ^0.8.4
   firebase_core: ^1.10.5
   firebase_auth: ^3.3.3
+  sqflite: ^2.0.1
+  path_provider: ^2.0.8
 
 dev_dependencies:
   flutter_test:
