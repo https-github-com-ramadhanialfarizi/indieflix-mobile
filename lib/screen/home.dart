@@ -85,7 +85,7 @@ class _HomeState extends State<Home> {
         onItemFocus: _onItemFocus,
         // itemSize: 100,
         focusOnItemTap: true,
-        itemSize: 216,
+        itemSize: 200,
         itemBuilder: _buildListItem,
         itemCount: data.length,
         scrollDirection: Axis.vertical,

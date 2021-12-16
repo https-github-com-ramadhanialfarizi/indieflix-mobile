@@ -8,8 +8,8 @@ class CardImage extends StatefulWidget {
 }
 
 class _CardImageState extends State<CardImage> {
-  final List<String> entries = <String>['A', 'B', 'C'];
-  final List<int> colorCodes = <int>[600, 500, 100];
+  late String movieTitle = "Tilik";
+  late String movieInfo = "test • test • test";
 
   @override
   Widget build(BuildContext context) {
@@ -56,14 +56,14 @@ class _CardImageState extends State<CardImage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Pengumuman",
+                        movieTitle,
                         style: Theme.of(context)
                             .textTheme
                             .headline5
                             ?.merge(const TextStyle(color: Colors.white)),
                       ),
-                      const Text("Semua pengumuman ada di sini",
-                          style: TextStyle(color: Colors.white)),
+                      Text(movieInfo,
+                          style: const TextStyle(color: Colors.white)),
                     ],
                   ),
                 ),
@@ -81,7 +81,7 @@ class _CardImageState extends State<CardImage> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
-          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
         ),
       ],
     );

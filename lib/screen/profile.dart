@@ -71,7 +71,7 @@ class _ProfileState extends State<Profile> {
               onItemFocus: _onItemFocus,
               // itemSize: 100,
               focusOnItemTap: true,
-              itemSize: 88,
+              itemSize: 96,
               itemBuilder: _buildListItem,
               itemCount: data.length,
               scrollDirection: Axis.vertical,
