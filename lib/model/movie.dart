@@ -1,19 +1,28 @@
 class Movie {
   int? id;
-  //description is the text we see on
+  //synopsis is the text we see on
   //main screen card text
-  String? description;
+  String? title;
+  String? synopsis;
+  String? streamURL;
   //isDone used to mark what Movie item is completed
   bool? isDone = false;
   //When using curly braces { } we note dart that
   //the parameters are optional
-  Movie({this.id, this.description, this.isDone = false});
+  Movie(
+      {this.id,
+      this.synopsis,
+      this.title,
+      this.streamURL,
+      this.isDone = false});
   factory Movie.fromDatabaseJson(Map<String, dynamic> data) => Movie(
         //This will be used to convert JSON objects that
         //are coming from querying the database and converting
         //it into a Movie object
         id: data['id'],
-        description: data['description'],
+        title: data['title'],
+        synopsis: data['synopsis'],
+        streamURL: data['streamURL'],
         //Since sqlite doesn't have boolean type for true/false
         //we will 0 to denote that it is false
         //and 1 for true
@@ -23,7 +32,9 @@ class Movie {
         //This will be used to convert Movie objects that
         //are to be stored into the datbase in a form of JSON
         "id": id,
-        "description": description,
+        "title": title,
+        "synopsis": synopsis,
+        "streamURL": streamURL,
         "is_done": isDone == false ? 0 : 1,
       };
 }
