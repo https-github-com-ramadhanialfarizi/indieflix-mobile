@@ -27,7 +27,7 @@ class CardImage extends StatelessWidget {
           semanticContainer: true,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           child: SizedBox(
-            height: 200,
+            height: 216,
             width: double.infinity,
             child: Stack(
               children: [
