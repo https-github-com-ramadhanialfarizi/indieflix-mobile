@@ -8,14 +8,102 @@ class MovieDetail extends StatefulWidget {
 }
 
 class _MovieDetailState extends State<MovieDetail> {
-  final String movieTitle = "Last Night in Soho";
-  final String posterURL =
-      "https://cdn1-production-images-kly.akamaized.net/2Hve9XXm28RgTXfVDw5STfv9fLk=/640x853/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3621647/original/030818200_1635929268-last_night_in_soho.jpg";
+  // final String movieTitle = "Last Night in Soho";
+  // final String posterURL =
+  //     "https://cdn1-production-images-kly.akamaized.net/2Hve9XXm28RgTXfVDw5STfv9fLk=/640x853/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3621647/original/030818200_1635929268-last_night_in_soho.jpg";
+
+  Map<String, dynamic> data = {
+    'id': 'nd829grb2364798db389',
+    'title': "Tilik",
+    'cast':
+        'Siti Fauziah, Brilliana Desy, Angeline Rizky, Dyah Mulani, Lully Syahkisrani',
+    'synopsis':
+        'Sebuah rombongan ibu-ibu dari suatu desa yang berangkat menggunakan truk ke kota guna menjenguk ibu lurah yang sakit. Mereka terpaksa menggunakan kendaraan ini karena bus yang biasanya digunakan tidak bisa dipesan dadakan. Dari sinilah semua cerita dan dialog jahil dimulai.',
+    'info': 'Best Picture • Festival Movie',
+    'streamURL': 'https://i.imgur.com/3Qmaql6.mp4',
+    'verticalPosterURL':
+        'https://cdn1-production-images-kly.akamaized.net/EytQObj54-wn-1RbC8G-Nx5Nv2M=/640x853/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3216143/original/086739100_1598152094-Poster_film_Tilik.jpeg',
+    'posterURL':
+        'https://akcdn.detik.net.id/visual/2020/08/20/tilik-1_169.png?w=650'
+  };
+
+  bool _isVoted = false;
+  void _votePressed() {
+    setState(() {
+      _isVoted = !_isVoted;
+    });
+    // print(_isVoted);
+  }
+
+  final TextEditingController _textFieldController = TextEditingController();
+  Future<void> _displayTextInputDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Ulasan'),
+            content: TextField(
+              onChanged: (value) {
+                setState(() {
+                  valueText = value;
+                });
+              },
+              controller: _textFieldController,
+              decoration:
+                  const InputDecoration(hintText: "Ketik ulasanmu di sini"),
+            ),
+            actions: <Widget>[
+              ElevatedButton(
+                child: const Text('CANCEL'),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+              ElevatedButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  setState(() {
+                    codeDialog = valueText;
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  late String codeDialog;
+  late String valueText;
 
   @override
   Widget build(BuildContext context) {
+    final String movieTitle = data['title'];
+    final String posterURL = data['verticalPosterURL'];
+    final String info = data['info'];
+    final String synopsis = data['synopsis'];
+    final String cast = data['cast'];
+
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: [
+                  Colors.black.withOpacity(0.0),
+                  Colors.black.withOpacity(0.9),
+                ],
+                begin: FractionalOffset.bottomCenter,
+                end: FractionalOffset.topCenter,
+                stops: const [0.0, 0.9],
+                tileMode: TileMode.clamp),
+          ),
+        ),
+        elevation: 0,
         title: Text(movieTitle),
       ),
       body: ListView(
@@ -53,7 +141,7 @@ class _MovieDetailState extends State<MovieDetail> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          "Last Night in Soho",
+                          movieTitle,
                           textAlign: TextAlign.center,
                           style: Theme.of(context)
                               .textTheme
@@ -63,8 +151,8 @@ class _MovieDetailState extends State<MovieDetail> {
                         const SizedBox(
                           height: 8,
                         ),
-                        const Text(
-                          "action • thriller • mystery",
+                        Text(
+                          info,
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(
@@ -88,22 +176,26 @@ class _MovieDetailState extends State<MovieDetail> {
                             ElevatedButton.icon(
                                 style: ButtonStyle(
                                     backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.transparent)),
-                                onPressed: () => Navigator.pushNamed(
-                                    context, 'movie_player'),
-                                icon: const Icon(Icons.play_circle_outline),
-                                label: const Text('Vote')),
+                                        MaterialStateProperty.all<Color?>(
+                                            Colors.grey[900])),
+                                onPressed: _votePressed,
+                                icon: _isVoted
+                                    ? const Icon(Icons.thumb_up)
+                                    : const Icon(Icons.thumb_up_outlined),
+                                label: _isVoted
+                                    ? const Text('Disukai')
+                                    : const Text('Suka')),
                             const SizedBox(
                               width: 16,
                             ),
                             ElevatedButton(
                                 style: ButtonStyle(
                                     backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.transparent)),
-                                onPressed: () => Navigator.pushNamed(
-                                    context, 'movie_player'),
+                                        MaterialStateProperty.all<Color?>(
+                                            Colors.grey[900])),
+                                onPressed: () async {
+                                  return _displayTextInputDialog(context);
+                                },
                                 child: const Text('Beri Ulasan')),
                           ],
                         )
@@ -121,8 +213,7 @@ class _MovieDetailState extends State<MovieDetail> {
                 const SizedBox(
                   height: 8,
                 ),
-                const Text(
-                    "An aspiring fashion designer is mysteriously able to enter the 1960s, where she encounters a dazzling wannabe singer. However, the glamour is not all it appears to be, and the dreams of the past start to crack and splinter into something far darker."),
+                Text(synopsis),
                 const SizedBox(
                   height: 16,
                 ),
@@ -130,8 +221,7 @@ class _MovieDetailState extends State<MovieDetail> {
                 const SizedBox(
                   height: 8,
                 ),
-                const Text(
-                    "Thomasin McKenzie, Anya Taylor-Joy, Matt Smith, Rita Tushingham, Terence Stamp, Diana Rigg"),
+                Text(cast),
               ],
             ),
           )
