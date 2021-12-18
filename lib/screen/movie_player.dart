@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:indieflix/component/sliding_appbar.dart';
 import 'package:video_player/video_player.dart';
 
 class MoviePlayer extends StatefulWidget {
@@ -14,22 +13,17 @@ class _MoviePlayerState extends State<MoviePlayer>
     with SingleTickerProviderStateMixin {
   late VideoPlayerController _controller;
   late Future<void> _initializeVideoPlayerFuture;
-  late final AnimationController _appBarController;
 
   @override
   void initState() {
     _controller = VideoPlayerController.network(
-        'https://rr2---sn-poqvn5u-jb3d.googlevideo.com/videoplayback?expire=1639510330&ei=2py4YZf1Gpb6yQXLqrmIBQ&ip=188.126.94.182&id=o-AC0zSe0SUR8IfeDluof6tK9jl2T-z78dLSXp-JCCyTAE&itag=18&source=youtube&requiressl=yes&vprv=1&mime=video%2Fmp4&ns=um9TuYLAOJLvlAr2xHmsksEG&gir=yes&clen=22753570&ratebypass=yes&dur=327.053&lmt=1550162045361138&fexp=24001373,24007246&c=WEB&txp=5531432&n=mmyB12TI79oPkg&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AOq0QJ8wRQIgVUtZlPGcZD7d9qjFh8E-f769Y7fGDNaGh5_hdtjeSI8CIQDHLmRTiXokzOtn7zQl_vs6eh1LZK_fWA4Z6HY96llbPQ%3D%3D&redirect_counter=1&rm=sn-5golk7l&req_id=c605426313b7a3ee&cms_redirect=yes&ipbypass=yes&mh=bL&mip=120.188.66.95&mm=31&mn=sn-poqvn5u-jb3d&ms=au&mt=1639488548&mv=m&mvi=2&pcm2cms=yes&pl=23&lsparams=ipbypass,mh,mip,mm,mn,ms,mv,mvi,pcm2cms,pl&lsig=AG3C_xAwRQIgGD7W3VW9LcZWnd4nEbRXmwAMpaGvI0JoCT6OI-iUFT4CIQC4h1M2HuqvkmJevUTlwSxU1zD-85ieY58xLqf5RD5C_A%3D%3D',
+        'https://firebasestorage.googleapis.com/v0/b/indieflix-17bcd.appspot.com/o/Film%20Pendek%20-%20TILIK%20_%20Trailer%20(2018).mp4?alt=media&token=973cdbe4-620e-4857-893a-543fd0b01f74',
         videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true));
 
     _initializeVideoPlayerFuture = _controller.initialize();
 
     super.initState();
 
-    _appBarController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 400),
-    );
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
@@ -53,63 +47,125 @@ class _MoviePlayerState extends State<MoviePlayer>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SlidingAppBar(
-        visible: !_controller.value.isPlaying,
-        controller: _appBarController,
-        child: AppBar(
-          title: const Text('Last Night in Soho'),
-          systemOverlayStyle: const SystemUiOverlayStyle(),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pop(context),
+      backgroundColor: Colors.black,
+      body: Stack(
+        children: [
+          Center(
+            child: FutureBuilder(
+              future: _initializeVideoPlayerFuture,
+              builder: (context, snapshot) {
+                // print(snapshot);
+                if (snapshot.connectionState == ConnectionState.done) {
+                  // If the VideoPlayerController has finished initialization, use
+                  // the data it provides to limit the aspect ratio of the video.
+                  // _controller.play();
+                  return AspectRatio(
+                    aspectRatio: _controller.value.aspectRatio,
+                    // Use the VideoPlayer widget to display the video.
+                    child: VideoPlayer(_controller),
+                  );
+                } else {
+                  // If the VideoPlayerController is still initializing, show a
+                  // loading spinner.
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            ),
           ),
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
-      ),
-      body: Center(
-        child: FutureBuilder(
-          future: _initializeVideoPlayerFuture,
-          builder: (context, snapshot) {
-            // print(snapshot);
-            if (snapshot.connectionState == ConnectionState.done) {
-              // If the VideoPlayerController has finished initialization, use
-              // the data it provides to limit the aspect ratio of the video.
-              // _controller.play();
-              return AspectRatio(
-                aspectRatio: _controller.value.aspectRatio,
-                // Use the VideoPlayer widget to display the video.
-                child: VideoPlayer(_controller),
-              );
-            } else {
-              // If the VideoPlayerController is still initializing, show a
-              // loading spinner.
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Wrap the play or pause in a call to `setState`. This ensures the
-          // correct icon is shown.
-          setState(() {
-            // If the video is playing, pause it.
-            if (_controller.value.isPlaying) {
-              _controller.pause();
-            } else {
-              // If the video is paused, play it.
-              _controller.play();
-            }
-          });
-        },
-        // Display the correct icon depending on the state of the player.
-        child: Icon(
-          _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-        ),
+          Container(
+            decoration: BoxDecoration(
+                gradient: _controller.value.isPlaying
+                    ? null
+                    : LinearGradient(
+                        begin: FractionalOffset.topCenter,
+                        end: FractionalOffset.bottomCenter,
+                        colors: [
+                            Colors.black.withOpacity(0.0),
+                            Colors.black.withOpacity(0.7),
+                          ],
+                        stops: const [
+                            0.0,
+                            1.0
+                          ])),
+            height: double.infinity,
+            width: double.infinity,
+          ),
+          AnimatedOpacity(
+              // If the widget is visible, animate to 0.0 (invisible).
+              // If the widget is hidden, animate to 1.0 (fully visible).
+              opacity: !_controller.value.isPlaying ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 500),
+              // The green box must be a child of the AnimatedOpacity widget.
+              child: Stack(
+                children: [
+                  IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(Icons.arrow_back)),
+                  Center(
+                    child: ClipOval(
+                      child: Material(
+                        color: Colors.grey[900], // Button color
+                        child: InkWell(
+                          onTap: () {
+                            // Wrap the play or pause in a call to `setState`. This ensures the
+                            // correct icon is shown.
+                            setState(() {
+                              // If the video is playing, pause it.
+                              if (_controller.value.isPlaying) {
+                                _controller.pause();
+                              } else {
+                                // If the video is paused, play it.
+                                _controller.play();
+                              }
+                            });
+                          },
+                          child: SizedBox(
+                              width: 56,
+                              height: 56,
+                              child: Icon(
+                                _controller.value.isPlaying
+                                    ? Icons.pause
+                                    : Icons.play_arrow,
+                              )),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Center(
+                        child: Positioned(
+                            bottom: 100,
+                            width: MediaQuery.of(context).size.width,
+                            child: VideoProgressIndicator(
+                              _controller,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 50),
+                              allowScrubbing: true,
+                              colors: VideoProgressColors(
+                                  bufferedColor: (Colors.grey[700])!,
+                                  backgroundColor: (Colors.grey[900])!,
+                                  playedColor: Colors.white),
+                            )),
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Text(
+                        'Tilik',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                    ],
+                  ),
+                ],
+              ))
+        ],
       ),
     );
   }

@@ -27,6 +27,9 @@ class _HomeState extends State<Home> {
   List<Map<String, dynamic>> data = [
     {
       'id': 'nd829grb2364798db389',
+      'vote_count': 9,
+      'cast':
+          'Siti Fauziah, Brilliana Desy, Angeline Rizky, Dyah Mulani, Lully Syahkisrani',
       'title': "Tilik",
       'synopsis': 'wkwk ini sinposis',
       'info': 'Best Picture • Festival Movie',
@@ -38,6 +41,8 @@ class _HomeState extends State<Home> {
     },
     {
       'id': 'nd829grb2364798db389',
+      'vote_count': 9,
+      'cast': '',
       'title': "Tabula Rasa",
       'synopsis':
           'Seorang pemuda dari Serui, Papua, yang memiliki impian menjadi seorang pemain bola profesional. Namun, ternyata takdir membawanya pada nasib yang tidak beruntung, ia malah menjadi luntang lantung di pinggir kota besar. Gagal menjadi pemain sepak bola, Hans pun menemukan bakat lain di bidang kuliner.',
@@ -50,6 +55,8 @@ class _HomeState extends State<Home> {
     },
     {
       'id': 'nd829grb2364798db389',
+      'vote_count': 9,
+      'cast': '',
       'title': "27 Steps of May",
       'synopsis':
           'Perjalanan Mbah Sri mencari makam asli mendiang suaminya, Prawiro, yang meninggal saat perang. Selama ini, Mbah Sri tahunya makam suaminya adalah sebuah gundukan tanah yang di atasnya ada bambu runcing dan bendera.',
@@ -62,6 +69,8 @@ class _HomeState extends State<Home> {
     },
     {
       'id': 'nd829grb2364798db389',
+      'vote_count': 9,
+      'cast': '',
       'title': "Ziarah",
       'synopsis':
           'Perjalanan Mbah Sri mencari makam asli mendiang suaminya, Prawiro, yang meninggal saat perang. Selama ini, Mbah Sri tahunya makam suaminya adalah sebuah gundukan tanah yang di atasnya ada bambu runcing dan bendera.',
@@ -74,6 +83,8 @@ class _HomeState extends State<Home> {
     },
     {
       'id': 'nd829grb2364798db389',
+      'vote_count': 9,
+      'cast': '',
       'title': "Solo, Solitude",
       'synopsis':
           'Melarikan diri ke Pontianak pada 27 Juli 1996, akhirnya ia dinyatakan hilang pada tahun 1998 bersama 12 aktivis lainnya. Hingga kini Wiji Thukul dinyatakan hilang tanpa diketahui keberadaannya.',
