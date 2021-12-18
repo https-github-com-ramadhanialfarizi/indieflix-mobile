@@ -167,7 +167,7 @@ class _MovieDetailState extends State<MovieDetail> {
                                         MaterialStateProperty.all<Color?>(
                                             Colors.red[700])),
                                 onPressed: () => Navigator.pushNamed(
-                                    context, 'movie_player'),
+                                    context, '/movie_player'),
                                 icon: const Icon(Icons.play_circle_outline),
                                 label: const Text('Putar')),
                             const SizedBox(

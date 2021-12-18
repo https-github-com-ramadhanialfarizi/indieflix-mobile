@@ -80,7 +80,8 @@ class CardImage extends StatelessWidget {
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: () => Navigator.pushNamed(context, 'movie_detail'),
+                      onTap: () =>
+                          Navigator.pushNamed(context, '/movie_detail'),
                     ),
                   ),
                 )

@@ -50,10 +50,10 @@ class MyApp extends StatelessWidget {
           case '/login':
             return CupertinoPageRoute(
                 builder: (_) => const Login(), settings: settings);
-          case 'movie_detail':
+          case '/movie_detail':
             return CupertinoPageRoute(
                 builder: (_) => const MovieDetail(), settings: settings);
-          case 'movie_player':
+          case '/movie_player':
             return CupertinoPageRoute(
                 builder: (_) => const MoviePlayer(), settings: settings);
         }
