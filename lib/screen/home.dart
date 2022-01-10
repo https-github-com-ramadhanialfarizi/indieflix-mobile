@@ -108,7 +108,10 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Indie Flix"),
+        title: Image.asset(
+          "assets/image/logo-crop.png",
+          height: 25,
+        ),
         centerTitle: true,
       ),
       body: ScrollSnapList(

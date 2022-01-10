@@ -14,7 +14,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   late String profilePictureURL =
       'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=240';
-  late String profileUserName = 'Abadi Suryo';
+  late String profileUserName = 'Gabriella Patricia';
 
   List<Map<String, dynamic>> data = [
     {
