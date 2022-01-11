@@ -9,7 +9,7 @@ const movieTABLE = 'Movie';
 class DatabaseProvider {
   static final DatabaseProvider dbProvider = DatabaseProvider();
 
-  late Database? _database;
+  Database? _database;
   Future<Database?> get database async {
     if (_database != null) return _database;
     _database = await createDatabase();
@@ -37,7 +37,7 @@ class DatabaseProvider {
         "synopsis TEXT, "
         "info TEXT, "
         "streamURL TEXT, "
-        "posterURL TEXT, "
+        "posterURL TEXT"
         /*SQLITE doesn't have boolean type
         so we store isDone as integer where 0 is false
         and 1 is true*/

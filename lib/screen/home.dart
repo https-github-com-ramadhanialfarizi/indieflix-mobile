@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:indieflix/bloc/movie_bloc.dart';
 import 'package:indieflix/component/card_image.dart';
+import 'package:indieflix/model/movie.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 // import 'package:indieflix/component/carousel.dart';
 // import 'package:indieflix/component/flat_card.dart';
@@ -15,6 +17,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final MovieBloc movieBloc = MovieBloc();
+
   // List<int> data = [1, 2, 3, 4];
 
   // int _focusedIndex = 0;
@@ -22,6 +26,12 @@ class _HomeState extends State<Home> {
     setState(() {
       // _focusedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    movieBloc.getMovies();
+    super.initState();
   }
 
   List<Map<String, dynamic>> data = [
@@ -114,19 +124,108 @@ class _HomeState extends State<Home> {
         ),
         centerTitle: true,
       ),
-      body: ScrollSnapList(
-        onItemFocus: _onItemFocus,
-        // itemSize: 100,
-        focusOnItemTap: true,
-        itemSize: 216,
-        itemBuilder: _buildListItem,
-        itemCount: data.length,
-        scrollDirection: Axis.vertical,
-        dynamicItemSize: true,
-        initialIndex: 1,
-        // dynamicItemOpacity: 0.5,
-        dynamicSizeEquation: (distance) => 1 - min(distance.abs() / 500, 0.1),
+      body: getMoviesWidget(),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        Random random = Random();
+        final newMovie = Movie(
+            id: random.nextInt(1000),
+            title: 'ekwlkroewpk',
+            synopsis: 'fesno gjk ',
+            streamURL: '',
+            posterURL: 'frnfiuenrf',
+            info: 'kanfoan');
+        movieBloc.addMovie(newMovie);
+      }),
+      // body: ScrollSnapList(
+      //   onItemFocus: _onItemFocus,
+      //   // itemSize: 100,
+      //   focusOnItemTap: true,
+      //   itemSize: 216,
+      //   itemBuilder: _buildListItem,
+      //   itemCount: data.length,
+      //   scrollDirection: Axis.vertical,
+      //   dynamicItemSize: true,
+      //   initialIndex: 1,
+      //   // dynamicItemOpacity: 0.5,
+      //   dynamicSizeEquation: (distance) => 1 - min(distance.abs() / 500, 0.1),
+      // ),
+    );
+  }
+
+  Widget getMoviesWidget() {
+    return StreamBuilder(
+      stream: movieBloc.movies,
+      builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
+        return getMovieCardWidget(snapshot);
+      },
+    );
+  }
+
+  Widget getMovieCardWidget(AsyncSnapshot<List<Movie>> snapshot) {
+    if (snapshot.hasData) {
+      if (snapshot.data!.isNotEmpty) {
+        // List<Movie>? movies = snapshot.data;
+
+        return ScrollSnapList(
+          onItemFocus: _onItemFocus,
+          // itemSize: 100,
+          focusOnItemTap: true,
+          itemSize: 216,
+          itemBuilder: _buildListItem,
+          itemCount: snapshot.data!.length,
+          scrollDirection: Axis.vertical,
+          dynamicItemSize: true,
+          initialIndex: 1,
+          // dynamicItemOpacity: 0.5,
+          dynamicSizeEquation: (distance) => 1 - min(distance.abs() / 500, 0.1),
+        );
+      } else {
+        return Center(
+          //this is used whenever there 0 Todo
+          //in the data base
+          child: noMovieMessageWidget(),
+        );
+      }
+    } else {
+      return Center(
+        /*since most of our I/O operations are done
+        outside the main thread asynchronously
+        we may want to display a loading indicator
+        to let the use know the app is currently
+        processing*/
+        child: loadingData(),
+      );
+    }
+  }
+
+  Widget loadingData() {
+    //pull todos again
+    movieBloc.getMovies();
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const <Widget>[
+          CircularProgressIndicator(),
+          Text("Loading...",
+              style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500))
+        ],
       ),
     );
+  }
+
+  Widget noMovieMessageWidget() {
+    return const Text(
+      "Start adding Todo...",
+      style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
+    );
+  }
+
+  @override
+  dispose() {
+    super.dispose();
+    /*close the stream in order
+    to avoid memory leaks
+    */
+    movieBloc.dispose();
   }
 }

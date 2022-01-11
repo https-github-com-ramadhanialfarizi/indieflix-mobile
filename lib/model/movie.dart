@@ -7,8 +7,6 @@ class Movie {
   String? synopsis;
   String? streamURL;
   String? posterURL;
-  //isDone used to mark what Movie item is completed
-  bool? isDone = false;
   //When using curly braces { } we note dart that
   //the parameters are optional
   Movie(
@@ -17,22 +15,20 @@ class Movie {
       this.title,
       this.info,
       this.streamURL,
-      this.posterURL,
-      this.isDone = false});
+      this.posterURL});
   factory Movie.fromDatabaseJson(Map<String, dynamic> data) => Movie(
-        //This will be used to convert JSON objects that
-        //are coming from querying the database and converting
-        //it into a Movie object
-        id: data['id'],
-        title: data['title'],
-        info: data['info'],
-        synopsis: data['synopsis'],
-        streamURL: data['streamURL'],
-        posterURL: data['posterURL'],
-        //Since sqlite doesn't have boolean type for true/false
-        //we will 0 to denote that it is false
-        //and 1 for true
-        isDone: data['is_done'] == 0 ? false : true,
+      //This will be used to convert JSON objects that
+      //are coming from querying the database and converting
+      //it into a Movie object
+      id: data['id'],
+      title: data['title'],
+      info: data['info'],
+      synopsis: data['synopsis'],
+      streamURL: data['streamURL'],
+      posterURL: data['posterURL']
+      //Since sqlite doesn't have boolean type for true/false
+      //we will 0 to denote that it is false
+      //and 1 for true
       );
   Map<String, dynamic> toDatabaseJson() => {
         //This will be used to convert Movie objects that
@@ -42,8 +38,7 @@ class Movie {
         "synopsis": synopsis,
         "info": info,
         "streamURL": streamURL,
-        "posterURL": posterURL,
-        "is_done": isDone == false ? 0 : 1,
+        "posterURL": posterURL
       };
 }
 
