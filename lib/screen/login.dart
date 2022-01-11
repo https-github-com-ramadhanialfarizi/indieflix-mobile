@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -48,7 +47,7 @@ class _LoginState extends State<Login> {
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.popUntil(context, (route) => false);
-                              Navigator.pushNamed(context, '/');
+                              Navigator.pushNamed(context, '/root');
                             },
                             child: const Text(
                               'Login',
@@ -83,7 +82,9 @@ class _LoginState extends State<Login> {
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.popAndPushNamed(context, '/root');
+                    },
                     child: const Text(
                       'Login with Google',
                     ),

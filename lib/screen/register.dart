@@ -56,7 +56,9 @@ class _RegisterState extends State<Register> {
                         const SizedBox(height: 20),
                         Center(
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.popAndPushNamed(context, '/login');
+                            },
                             child: const Text(
                               'Register',
                               style: TextStyle(color: Colors.white),

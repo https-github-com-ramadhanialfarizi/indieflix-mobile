@@ -35,11 +35,12 @@ class MyApp extends StatelessWidget {
          ThemeMode.light for light theme,
          ThemeMode.dark for dark theme
       */
-      home: isLoggedIn ? const BottomNavigation() : const Landing(),
+      // home: isLoggedIn ? const BottomNavigation() : const Landing(),
+      home: const Landing(),
       // initialRoute: '/landing',
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
-          case '/':
+          case '/root':
             return CupertinoPageRoute(
                 builder: (_) => const BottomNavigation(), settings: settings);
           case '/landing':
